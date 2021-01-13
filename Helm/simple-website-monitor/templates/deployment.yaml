@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: simple-website-monitor
+  name: simple-website-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-website-monitor
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: simple-website-monitor
+    spec:
+      containers:
+      - name: simple-website-monitor
+        image: "{{ .Values.swm.repository }}:{{ .Values.swm.tag }}"
+        imagePullPolicy: {{ .Values.swm.pullPolicy }}
+        resources:
+          requests:
+            memory: {{ .Values.swm.requests.memory | quote }}
+            cpu: {{ .Values.swm.requests.cpu | quote }}
+          limits:
+            memory: {{ .Values.swm.limits.memory | quote }}
+            cpu: {{ .Values.swm.limits.cpu | quote }}
+        env:
+          - name: TZ
+            value: {{ .Values.timezone | quote }}
+          - name: INFLUXDB_URL
+            valueFrom:
+              configMapKeyRef:
+                name: simple-website-monitor-config
+                key: INFLUXDB_URL
+          - name: INFLUXDB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: simple-website-monitor-config
+                key: INFLUXDB_PORT
+          - name: INFLUXDB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: simple-website-monitor-config
+                key: INFLUXDB_NAME
+          {{- if .Values.swmDb.authEnabled }}
+          - name: AUTH_ENABLED
+            value: "true"
+          - name: INFLUXDB_USER
+            valueFrom:
+              secretKeyRef:
+                name: simple-website-monitor-secrets
+                key: INFLUXDB_USER
+          - name: INFLUXDB_PW
+            valueFrom:
+              secretKeyRef:
+                name: simple-website-monitor-secrets
+                key: INFLUXDB_PW
+          {{- end }}
+      imagePullSecrets:
+      - name: {{ .Values.swm.imagePullSecret }}

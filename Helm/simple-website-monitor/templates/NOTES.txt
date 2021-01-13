@@ -1,0 +1,2 @@
+The simple-website-monitor was successfully deployed.
+Check out your InfluxDB if data is coming in.

@@ -1,5 +1,37 @@
 # simple-website-monitor
-A simple website monitor based on the Telegraf http_response plugin
+
+**ATTENTION:**  
+This project is still a work in progress.
+
+A simple website monitor based on the Telegraf http_response plugin.  
+The idea is to run Telegraf as deployment on Kubernetes for hight availability.    
+This project contains a Helm Chart and some other files and scripts for the best usability.
+
+Telegraf/http_response docs: https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_response
+
+## Quick Guide for simple-website-monitor
+
+### Prerequisites
+- Install Helm on your client: https://helm.sh/docs/intro/quickstart/
+- Install kubectl on your client: https://kubernetes.io/docs/tasks/tools/install-kubectl/  
+- Clone this project to your client  
+- Make sure you have a kubeconfig for the target Kubernetes cluster and save it to ```"~./kube/config```.
+
+### Install Telegraf with http_response
+```
+kubectl apply -f simple-website-monitor-namespace.yaml
+kubectl create -n simple-website-monitor secret generic rkm-secrets --from-literal=INFLUXDB_USER=<user> --from-literal=INFLUXDB_PW=<password>
+helm upgrade --install -n simple-website-monitor simple-website-monitor -f custmo-values.yaml Helm/simple-website-monitor
+```
+
+### Rancher specific
+Add the grafana and loki namespaces to a project if you want.
+
+## Clean up
+```
+helm uninstall -n simple-website-monitor simple-website-monitor
+kubectl delete namespace simple-website-monitor
+```
 
 # Licence
 Copyright 2021 ONZACK AG

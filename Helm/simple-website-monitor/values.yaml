@@ -1,0 +1,27 @@
+---
+# Default values for ONZACK website
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+timezone: "Europe/Zurich"
+
+swm:
+  repository: telegraf
+  tag: alpine
+  pullPolicy: IfNotPresent
+  requests:
+    memory: 100Mi
+    cpu: 150m
+  limits:
+    memory: 250Gi
+    cpu: 500m
+  imagePullSecret: REDACTED
+
+# InfluxDB configuration for RKM Mission Control
+swmDb:
+  authEnabled: true
+  # NOTE: If authEnabled=true, the chart expects InfluxDB with authentication and you need to create a Kubernetes secret with that information
+  # -> kubectl create -n simple-website-monitor secret generic rkm-secrets --from-literal=INFLUXDB_USER=<user> --from-literal=INFLUXDB_PW=<password>
+  influxDBUrl: http://influxdb.example.com
+  influxDBPort: 80
+  influxDBName: telegraf
