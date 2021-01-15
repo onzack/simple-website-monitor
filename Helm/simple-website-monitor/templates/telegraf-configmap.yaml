@@ -31,6 +31,7 @@ data:
 
       ## Whether to follow redirects from the server (defaults to false)
       # follow_redirects = false
+      follow_redirects = true
 
       ## Optional file with Bearer token
       ## file content is added as an Authorization header
