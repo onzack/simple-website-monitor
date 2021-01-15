@@ -6,7 +6,7 @@ COPY --chown=simple-user:simple-user entrypoint.sh /opt/entrypoint.sh
 RUN chmod -x /opt/entrypoint.sh && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata curl ca-certificates iputils-ping snmp procps lm-sensors && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata curl gnupg gnupg2 gnupg1 apt-transport-https ca-certificates iputils-ping snmp procps lm-sensors && \
     curl -sL https://repos.influxdata.com/influxdb.key | apt-key add - && \
     source /etc/lsb-release && \
     echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | tee /etc/apt/sources.list.d/influxdb.list && \
@@ -15,7 +15,7 @@ RUN chmod -x /opt/entrypoint.sh && \
     # rm -f telegraf_${TELEGRAF_VERSION}-1_amd64.deb && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install telegraf && \
-    DEBIAN_FRONTEND=noninteractive apt-get purge -y curl && \
+    DEBIAN_FRONTEND=noninteractive apt-get purge -y curl gnupg gnupg2 gnupg1 apt-transport-https && \
     DEBIAN_FRONTEND=noninteractive apt-get -y autoremove && \
     DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/*
