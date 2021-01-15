@@ -8,7 +8,7 @@ RUN chmod -x /opt/entrypoint.sh && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata curl gnupg gnupg2 gnupg1 apt-transport-https ca-certificates iputils-ping snmp procps lm-sensors && \
     curl -sL https://repos.influxdata.com/influxdb.key | apt-key add - && \
-    source /etc/lsb-release && \
+    export $(head -n 3 /etc/lsb-release) && \
     echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | tee /etc/apt/sources.list.d/influxdb.list && \
     # curl -o telegraf_1.17.0-1_amd64.deb https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION}-1_amd64.deb && \
     # dpkg -i telegraf_${TELEGRAF_VERSION}-1_amd64.deb && \
