@@ -1,13 +1,13 @@
 ---
-# Default values for ONZACK website
+# Default values for ONZACK simple-website-monitoring
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 timezone: "Europe/Zurich"
 
 swm:
-  repository: telegraf
-  tag: alpine
+  repository: quay.io/onzack/telegraf-swm
+  tag: latest
   pullPolicy: IfNotPresent
   requests:
     memory: 100Mi
@@ -15,7 +15,7 @@ swm:
   limits:
     memory: 250Gi
     cpu: 500m
-  # imagePullSecret is only necessary if you use a Telegraf image from a private registry.  
+  # imagePullSecret is only necessary if you use a Telegraf image from a private registry.
   imagePullSecret: REDACTED
 
 # InfluxDB configuration

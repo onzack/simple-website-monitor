@@ -9,7 +9,7 @@ RUN chmod -x /opt/entrypoint.sh && \
     apt-get install -y --no-install-recommends tzdata curl ca-certificates iputils-ping snmp procps lm-sensors && \
     curl -o telegraf_1.17.0-1_amd64.deb https://dl.influxdata.com/telegraf/releases/telegraf_${TELEGRAF_VERSION}-1_amd64.deb && \
     dpkg -i telegraf_${TELEGRAF_VERSION}-1_amd64.deb && \
-    rm -f telegraf_${TELEGRAF_VERSION}-1_amd64.deb
+    rm -f telegraf_${TELEGRAF_VERSION}-1_amd64.deb && \
     apt-get purge -y curl && \
     apt-get -y autoremove && \
     apt-get clean && \
