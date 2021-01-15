@@ -17,7 +17,7 @@ swm:
     cpu: 500m
   # imagePullSecret is only necessary if you use a Telegraf image from a private registry.
   imagePullSecret: REDACTED
-  urls: '"https://www.onzack.com" "https://git.lab.onzack.io" "https://workbench.onzack.com"'
+  urls: '"https://www.example.com" "https://test.example.com"'
 
 # InfluxDB configuration
 swmDb:
