@@ -1,8 +1,5 @@
 # simple-website-monitor
 
-**ATTENTION:**  
-This project is still a work in progress.
-
 A simple website monitor based on the Telegraf http_response plugin.  
 The idea is to run Telegraf as deployment on Kubernetes for hight availability.    
 This project contains a Helm Chart and some other files and scripts for the best usability.  
