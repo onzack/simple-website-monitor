@@ -27,13 +27,14 @@ Telegraf/http_response docs: https://github.com/influxdata/telegraf/tree/master/
 
 ### Install Telegraf with http_response
 ```
-kubectl apply -f simple-website-monitor-namespace.yaml
-kubectl create -n simple-website-monitor secret generic rkm-secrets --from-literal=INFLUXDB_USER=<user> --from-literal=INFLUXDB_PW=<password>
-helm upgrade --install -n simple-website-monitor simple-website-monitor -f custmo-values.yaml Helm/simple-website-monitor
+kubectl apply -f ./simple-website-monitor/simple-website-monitor-namespace.yaml
+cp ./simple-website-monotor/custom-values.yaml ./custom-values.yaml
+vim ./custom-values.yaml
+helm install -n simple-website-monitor simple-website-monitor -f custom-values.yaml --set swmDb.influxDbUser=<user> --set swmDb.influxDbPW=<password> ./simple-website-monitor/Helm/simple-website-monitor
 ```
 
 ### Rancher specific
-Add the grafana and loki namespaces to a project if you want.
+Add the simple-website-monitor namespace to a project if you want.
 
 ## Clean up
 ```
