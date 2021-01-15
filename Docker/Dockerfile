@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 LABEL maintainer="https://github.com/onzack"
 RUN groupadd -g 10000 simple-user && useradd -u 10000 -g 10000 -s /bin/bash -m simple-user
 COPY --chown=simple-user:simple-user entrypoint.sh /opt/entrypoint.sh
-RUN chmod -x /opt/entrypoint.sh && \
+RUN chmod +x /opt/entrypoint.sh && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata curl gnupg gnupg2 gnupg1 apt-transport-https ca-certificates iputils-ping snmp procps lm-sensors && \
