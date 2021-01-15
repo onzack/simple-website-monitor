@@ -5,9 +5,17 @@ This project is still a work in progress.
 
 A simple website monitor based on the Telegraf http_response plugin.  
 The idea is to run Telegraf as deployment on Kubernetes for hight availability.    
-This project contains a Helm Chart and some other files and scripts for the best usability.
+This project contains a Helm Chart and some other files and scripts for the best usability.  
+
+Used technonlogies:
+* Telegraf
+* InfluxDB
+* Grafana
 
 Telegraf/http_response docs: https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http_response
+
+# Architecture
+![A Sample Graph for visualization ](https://github.com/onzack/simple-website-monitor/blob/main/Docs/simple-website-monitor-architecture.png)
 
 ## Quick Guide for simple-website-monitor
 

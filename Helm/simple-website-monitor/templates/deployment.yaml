@@ -20,10 +20,21 @@ spec:
       labels:
         app: simple-website-monitor
     spec:
+      securityContext:
+        runAsUser: 10000
+        runAsGroup: 10000
+        fsGroup: 10000
       containers:
       - name: simple-website-monitor
         image: "{{ .Values.swm.repository }}:{{ .Values.swm.tag }}"
         imagePullPolicy: {{ .Values.swm.pullPolicy }}
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+             - ALL
         resources:
           requests:
             memory: {{ .Values.swm.requests.memory | quote }}
@@ -36,18 +47,18 @@ spec:
             value: {{ .Values.timezone | quote }}
           - name: INFLUXDB_URL
             valueFrom:
-              configMapKeyRef:
-                name: simple-website-monitor-config
+              secretKeyRef:
+                name: simple-website-monitor-secrets
                 key: INFLUXDB_URL
           - name: INFLUXDB_PORT
             valueFrom:
-              configMapKeyRef:
-                name: simple-website-monitor-config
+              secretKeyRef:
+                name: simple-website-monitor-secrets
                 key: INFLUXDB_PORT
           - name: INFLUXDB_NAME
             valueFrom:
-              configMapKeyRef:
-                name: simple-website-monitor-config
+              secretKeyRef:
+                name: simple-website-monitor-secrets
                 key: INFLUXDB_NAME
           {{- if .Values.swmDb.authEnabled }}
           - name: AUTH_ENABLED
@@ -63,5 +74,7 @@ spec:
                 name: simple-website-monitor-secrets
                 key: INFLUXDB_PW
           {{- end }}
+      {{- if .Values.swmDb.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.swm.imagePullSecret }}
+      {{- end }}

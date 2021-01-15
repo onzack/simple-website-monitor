@@ -15,13 +15,14 @@ swm:
   limits:
     memory: 250Gi
     cpu: 500m
+  # imagePullSecret is only necessary if you use a Telegraf image from a private registry.  
   imagePullSecret: REDACTED
 
-# InfluxDB configuration for RKM Mission Control
+# InfluxDB configuration
 swmDb:
   authEnabled: true
-  # NOTE: If authEnabled=true, the chart expects InfluxDB with authentication and you need to create a Kubernetes secret with that information
-  # -> kubectl create -n simple-website-monitor secret generic rkm-secrets --from-literal=INFLUXDB_USER=<user> --from-literal=INFLUXDB_PW=<password>
-  influxDBUrl: http://influxdb.example.com
-  influxDBPort: 80
-  influxDBName: telegraf
+  influxDbUrl: http://influxdb.example.com
+  influxDbPort: 80
+  influxDbName: telegraf
+  influxDbUser: REDACTED
+  influxDbPW: REDATCED

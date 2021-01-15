@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: simple-website-monitor-config
-data:
-  INFLUXDB_URL: {{ .Values.swmDb.influxDBUrl | quote }}
-  INFLUXDB_PORT: {{ .Values.swmDb.influxDBPort | quote }}
-  INFLUXDB_NAME: {{ .Values.swmDb.influxDBName }}
