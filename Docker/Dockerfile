@@ -15,7 +15,6 @@ RUN chmod -x /opt/entrypoint.sh && \
     DEBIAN_FRONTEND=noninteractive apt-get -y autoremove && \
     DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-COPY --chown=simple-user:simple-user entrypoint.sh /opt/entrypoint.sh
 USER 10000
 WORKDIR /home/simple-user
 ENTRYPOINT ["/opt/entrypoint.sh"]
