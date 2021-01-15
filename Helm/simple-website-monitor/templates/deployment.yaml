@@ -45,7 +45,6 @@ spec:
         env:
           - name: TZ
             value: {{ .Values.timezone | quote }}
-          {{- end }}
       {{- if .Values.swmDb.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.swm.imagePullSecret }}
