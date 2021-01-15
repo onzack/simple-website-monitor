@@ -18,5 +18,5 @@ RUN chmod -x /opt/entrypoint.sh && \
 COPY --chown=simple-user:simple-user entrypoint.sh /opt/entrypoint.sh
 USER 10000
 WORKDIR /home/simple-user
-ENTRYPOINT ["/opt/opt/entrypoint.sh"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
 CMD ["telegraf"]
