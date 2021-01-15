@@ -29,6 +29,7 @@ cp ./simple-website-monotor/custom-values.yaml ./custom-values.yaml
 vim ./custom-values.yaml
 helm install -n simple-website-monitor simple-website-monitor -f custom-values.yaml --set swmDb.influxDbUser=<user> --set swmDb.influxDbPW=<password> ./simple-website-monitor/Helm/simple-website-monitor
 ```
+You can find a Grafana Dashboard in this project. Add it to your Grafana instance to get started and monitor your websites.
 
 ### Rancher specific
 Add the simple-website-monitor namespace to a project if you want.
