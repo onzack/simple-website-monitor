@@ -45,34 +45,6 @@ spec:
         env:
           - name: TZ
             value: {{ .Values.timezone | quote }}
-          - name: INFLUXDB_URL
-            valueFrom:
-              secretKeyRef:
-                name: simple-website-monitor-secrets
-                key: INFLUXDB_URL
-          - name: INFLUXDB_PORT
-            valueFrom:
-              secretKeyRef:
-                name: simple-website-monitor-secrets
-                key: INFLUXDB_PORT
-          - name: INFLUXDB_NAME
-            valueFrom:
-              secretKeyRef:
-                name: simple-website-monitor-secrets
-                key: INFLUXDB_NAME
-          {{- if .Values.swmDb.authEnabled }}
-          - name: AUTH_ENABLED
-            value: "true"
-          - name: INFLUXDB_USER
-            valueFrom:
-              secretKeyRef:
-                name: simple-website-monitor-secrets
-                key: INFLUXDB_USER
-          - name: INFLUXDB_PW
-            valueFrom:
-              secretKeyRef:
-                name: simple-website-monitor-secrets
-                key: INFLUXDB_PW
           {{- end }}
       {{- if .Values.swmDb.imagePullSecret }}
       imagePullSecrets:
