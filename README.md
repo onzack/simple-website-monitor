@@ -21,10 +21,15 @@ You can find the Docker Image on [Quay.io](https://quay.io/repository/onzack/tel
 ## Quick Guide for simple-website-monitor
 
 ### Prerequisites
+On your client:
 - Install Helm on your client: https://helm.sh/docs/intro/quickstart/
 - Install kubectl on your client: https://kubernetes.io/docs/tasks/tools/install-kubectl/  
 - Clone this project to your client  
 - Make sure you have a kubeconfig for the target Kubernetes cluster and save it to ```"~./kube/config```.
+
+Infrastructure:
+- An InfluxDB instance
+- A Grafana instance
 
 ### Install Telegraf with http_response
 ```
