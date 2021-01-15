@@ -45,6 +45,14 @@ spec:
         env:
           - name: TZ
             value: {{ .Values.timezone | quote }}
+        volumeMounts:
+        - name: telegraf-config
+          mountPath: "/etc/telegraf"
+          readOnly: true
+      volumes:
+      - name: telegraf-config
+        configMap:
+          name: telegraf-configmap
       {{- if .Values.swmDb.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.swm.imagePullSecret }}
