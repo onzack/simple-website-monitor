@@ -18,7 +18,7 @@ data:
       ## address is Deprecated in 1.12, use 'urls'
 
       ## List of urls to query.
-      urls = [{{ .Values.swm.urls }}]
+      urls = {{ .Values.swm.urls }}
 
       ## Set http_proxy (telegraf uses the system wide proxy settings if it's is not set)
       # http_proxy = "http://localhost:8888"
