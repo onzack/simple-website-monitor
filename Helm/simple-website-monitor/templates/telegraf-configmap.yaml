@@ -72,6 +72,7 @@ data:
       # tls_key = "/etc/telegraf/key.pem"
       ## Use TLS but skip chain & host verification
       # insecure_skip_verify = false
+      insecure_skip_verify = true
       ## Use the given name as the SNI server name on each URL
       # tls_server_name = ""
 
